@@ -18,9 +18,11 @@ public class WeatherArtGenerator {
      * @param args The command-line arguments.
      */
     public static void main(String[] args) {
-        final String INPUT_JSON_PATH = "input/data.txt";
+        final String INPUT_JSON_PATH = "input/bsas_2022.txt";
         final int WIDTH = 1200;
         final int HEIGHT = 800;
+        final int X_OFFSET = 0; // Adjust to control the horizontal offset
+        final int Y_OFFSET = 0; // Adjust to control the horizontal offset
         final int X_SPACING = 2; // Adjust to control the horizontal spacing
         final int Y_SPACING = 6; // Adjust to control the vertical spacing
 
@@ -36,7 +38,10 @@ public class WeatherArtGenerator {
             List<List<Segment>> windSubegments = divideSegments(windSegments);
 
             // Create and display the JFrame
-            generateWindArt(windSubegments, WIDTH, HEIGHT, X_SPACING, Y_SPACING);
+            generateWindArt(
+                    windSubegments,
+                    WIDTH, HEIGHT, X_OFFSET, Y_OFFSET, X_SPACING, Y_SPACING
+            );
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -179,7 +184,9 @@ public class WeatherArtGenerator {
      */
     public static void generateWindArt(
             List<List<Segment>> windSubsegments,
-            int width, int height, int xSpacing, int ySpacing
+            int width, int height,
+            int xOffset, int yOffset,
+            int xSpacing, int ySpacing
     ) throws IOException {
         // Create a BufferedImage to draw the wind curves on
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -192,9 +199,6 @@ public class WeatherArtGenerator {
         graphics.fillRect(0, 0, width, height);
 
         // Plot the wind curves on the image
-        int yOffset = 0;
-        int xOffset = 0;
-
         for (List<Segment> segmentList : windSubsegments) {
             plotWindCurve(graphics, segmentList, xOffset, yOffset);
 
