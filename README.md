@@ -58,21 +58,6 @@ The Weather Art Generator is a Java application that creates generative art base
 
   - The generated art will be saved as output/weather_art.png.
 
-## Project Structure
-
-The repository is organized as follows:
-
-- `WeatherArtGenerator.java`: The main application entry point.
-- `JSONReader.java`: Reads JSON data from a file.
-- `JSONParser.java`: Parses JSON data into weather parameters.
-- `WeatherData.java`: Represents weather parameters.
-- `WindCurveGenerator.java`: Generates wind curves.
-- `WindSegmentDivider.java`: Divides wind segments into subsegments.
-- `FrameGenerator.java`: Creates and displays the graphical frame.
-- `Segment.java`: Represents a line segment.
-- `input/data.txt`: Sample JSON weather data (replace with your own data).
-- `output/weather_art.png`: The generated art image.
-
 ## Contributing
 
 Contributions are welcome! If you have ideas for improvements or new features, please open an issue or create a pull request.
