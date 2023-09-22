@@ -37,8 +37,8 @@ public class JSONProcessor {
      * @param jsonData The JSON data as a string.
      * @return A list of WeatherData objects.
      */
-    public static List<WeatherArtGenerator.WeatherData> parseJSONData(String jsonData) {
-        List<WeatherArtGenerator.WeatherData> weatherDataList = new ArrayList<>();
+    public static List<WeatherData> parseJSONData(String jsonData) {
+        List<WeatherData> weatherDataList = new ArrayList<>();
 
         // Parse the JSON data
         JSONObject jsonObject = new JSONObject(jsonData);
@@ -57,7 +57,7 @@ public class JSONProcessor {
             float windDirection = dayObject.getFloat("winddir");
 
             // Create a WeatherData object for the date and add it to the list
-            WeatherArtGenerator.WeatherData weatherData = new WeatherArtGenerator.WeatherData(temperature, windSpeed,
+            WeatherData weatherData = new WeatherData(temperature, windSpeed,
                     windDirection, humidity);
             weatherDataList.add(weatherData);
         }
