@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import javax.xml.crypto.dsig.XMLObject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,42 +11,35 @@ import java.util.List;
  * The WeatherArtGenerator class generates generative art based on weather data.
  */
 public class WeatherArtGenerator {
+    String inputPath;
+    int width;
+    int height;
+    int xOffset;
+    int yOffset;
+    int xSpacing;
+    int ySpacing;
 
-    /**
-     * The main method reads JSON data from a file, parses it into a list of WeatherData objects,
-     * generates wind curves, and plots them.
-     *
-     * @param args The command-line arguments.
-     */
-    public static void main(String[] args) {
-        final String INPUT_JSON_PATH = "input/bsas_2022.txt";
-        final int WIDTH = 1200;
-        final int HEIGHT = 800;
-        final int X_OFFSET = 0; // Adjust to control the horizontal offset
-        final int Y_OFFSET = 0; // Adjust to control the horizontal offset
-        final int X_SPACING = 2; // Adjust to control the horizontal spacing
-        final int Y_SPACING = 6; // Adjust to control the vertical spacing
+    public WeatherArtGenerator(String inputPath) {
+        this.inputPath = inputPath;
+        this.width = 1200;
+        this.height = 800;
+        this.xOffset = 0;
+        this.yOffset = 0;
+        this.xSpacing = 2;
+        this.ySpacing = 6;
+    }
 
-        try {
-            // Read JSON data from the file
-            String jsonData = JSONProcessor.readJSONFromFile(INPUT_JSON_PATH);
-
-            // Parse the JSON data into a list of WeatherData objects
-            List<WeatherData> weatherDataList = JSONProcessor.parseJSONData(jsonData);
-
-            List<Segment> windSegments = generateWindCurve(weatherDataList);
-
-            List<List<Segment>> windSubegments = divideSegments(windSegments);
-
-            // Create and display the JFrame
-            generateWindArt(
-                    windSubegments,
-                    WIDTH, HEIGHT, X_OFFSET, Y_OFFSET, X_SPACING, Y_SPACING
-            );
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public WeatherArtGenerator(
+            String inputPath, int width, int height, int xOffset, int yOffset,
+            int xSpacing, int ySpacing
+    ) {
+        this.inputPath = inputPath;
+        this.width = width;
+        this.height = height;
+        this.xOffset = xOffset;
+        this.yOffset = yOffset;
+        this.xSpacing = xSpacing;
+        this.ySpacing = ySpacing;
     }
 
     /**
