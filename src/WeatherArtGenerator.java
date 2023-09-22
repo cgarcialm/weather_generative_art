@@ -107,7 +107,7 @@ public class WeatherArtGenerator {
      * @param weatherDataList A list of WeatherData objects.
      * @return A list of wind curve segments.
      */
-    public static List<Segment> generateWindCurve(List<WeatherData> weatherDataList) {
+    private List<Segment> generateWindCurve(List<WeatherData> weatherDataList) {
         List<Segment> windSegments = new ArrayList<>();
 
         double x = 0; // Initial x-coordinate
@@ -143,7 +143,7 @@ public class WeatherArtGenerator {
      * @param originalSegments The original list of segments.
      * @return A list of sublists of segments.
      */
-    public static List<List<Segment>> divideSegments(List<Segment> originalSegments) {
+    private List<List<Segment>> divideSegments(List<Segment> originalSegments) {
         List<List<Segment>> dividedSegments = new ArrayList<>();
 
         int n = originalSegments.size();
@@ -168,20 +168,32 @@ public class WeatherArtGenerator {
         return dividedSegments;
     }
 
+    private List<List<WeatherArtGenerator.Segment>> processWeatherData(String jsonData) {
+        // Parse the JSON data into a list of WeatherData objects
+        List<WeatherData> weatherDataList = JSONProcessor.parseJSONData(jsonData);
+
+        List<WeatherArtGenerator.Segment> windSegments =
+                generateWindCurve(weatherDataList);
+
+        List<List<WeatherArtGenerator.Segment>> windSubsegments =
+                divideSegments(windSegments);
+
+        return windSubsegments;
+    }
+
     /**
      * Generates generative art representing wind curves based on a list of wind subsegments
      * and displays it in a graphical frame. The generated art is saved as an image file.
      *
-     * @param windSubsegments A list of wind curve subsegments, where each sublist represents
-     *                        a segment of the wind curve.
+     * @param jsonData The JSON weather data as a string.
      * @throws IOException If an I/O error occurs while saving the generated image.
      */
-    public static void generateWindArt(
-            List<List<Segment>> windSubsegments,
-            int width, int height,
-            int xOffset, int yOffset,
-            int xSpacing, int ySpacing
-    ) throws IOException {
+    public void generateWindArt(String jsonData)
+            throws IOException {
+
+        List<List<WeatherArtGenerator.Segment>> windSubsegments =
+                processWeatherData(jsonData);
+
         // Create a BufferedImage to draw the wind curves on
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
@@ -194,7 +206,7 @@ public class WeatherArtGenerator {
 
         // Plot the wind curves on the image
         for (List<Segment> segmentList : windSubsegments) {
-            plotWindCurve(graphics, segmentList, xOffset, yOffset);
+            plotSingleWindCurve(graphics, segmentList, xOffset, yOffset);
 
             xOffset += xSpacing;
             yOffset += ySpacing;
@@ -212,7 +224,7 @@ public class WeatherArtGenerator {
      * @param xOffset  The x-offset for plotting.
      * @param yOffset  The y-offset for plotting.
      */
-    public static void plotWindCurve(Graphics g, List<Segment> segments,
+    private void plotSingleWindCurve(Graphics g, List<Segment> segments,
                                      int xOffset, int yOffset) {
         int x = xOffset; // Starting x-coordinate
         int y = yOffset; // Starting y-coordinate

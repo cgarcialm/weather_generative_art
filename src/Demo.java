@@ -26,20 +26,8 @@ public class Demo {
             // Read JSON data from the file
             String jsonData = JSONProcessor.readJSONFromFile(INPUT_JSON_PATH);
 
-            // Parse the JSON data into a list of WeatherData objects
-            List<WeatherData> weatherDataList = JSONProcessor.parseJSONData(jsonData);
-
-            List<WeatherArtGenerator.Segment> windSegments =
-                    WeatherArtGenerator.generateWindCurve(weatherDataList);
-
-            List<List<WeatherArtGenerator.Segment>> windSubegments =
-                    WeatherArtGenerator.divideSegments(windSegments);
-
             // Create and display the JFrame
-            WeatherArtGenerator.generateWindArt(
-                    windSubegments,
-                    WIDTH, HEIGHT, X_OFFSET, Y_OFFSET, X_SPACING, Y_SPACING
-            );
+            gen.generateWindArt(jsonData);
 
         } catch (Exception e) {
             e.printStackTrace();
