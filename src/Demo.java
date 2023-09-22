@@ -30,13 +30,13 @@ public class Demo {
             List<WeatherData> weatherDataList = JSONProcessor.parseJSONData(jsonData);
 
             List<WeatherArtGenerator.Segment> windSegments =
-                    gen.generateWindCurve(weatherDataList);
+                    WeatherArtGenerator.generateWindCurve(weatherDataList);
 
             List<List<WeatherArtGenerator.Segment>> windSubegments =
-                    gen.divideSegments(windSegments);
+                    WeatherArtGenerator.divideSegments(windSegments);
 
             // Create and display the JFrame
-            gen.generateWindArt(
+            WeatherArtGenerator.generateWindArt(
                     windSubegments,
                     WIDTH, HEIGHT, X_OFFSET, Y_OFFSET, X_SPACING, Y_SPACING
             );
