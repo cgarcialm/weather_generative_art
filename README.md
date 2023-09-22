@@ -83,13 +83,13 @@ Here are two examples of generative art images created using the Weather Art Gen
 
 ### Buenos Aires 2022
 
-![weather_art_ba_2022](https://github.com/cgarcialm/weather_generative_art/assets/62184644/4620e151-2cd7-4d78-a748-9b78dcc835f4)
+![weather_art_ba_2022](https://github-production-user-asset-6210df.s3.amazonaws.com/62184644/269842722-b84523cc-6ec3-4eaf-af18-da57922f9749.png)
 
 _Description: Generative art representing weather conditions in Buenos Aires in 2022._
 
 ### New York 2022
 
-![weather_art_ny_2022](https://github.com/cgarcialm/weather_generative_art/assets/62184644/66608534-ccd3-4ea7-ac5e-e62301454104)
+![weather_art_ny_2022](https://github-production-user-asset-6210df.s3.amazonaws.com/62184644/269842774-115759d7-3c26-4ced-a59d-80eaa42a42e8.png)
 
 _Description: Generative art representing weather conditions in New York in 2022._
 
