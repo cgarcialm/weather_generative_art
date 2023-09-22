@@ -1,14 +1,8 @@
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.io.File;
 import java.io.IOException;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +18,15 @@ public class WeatherArtGenerator {
      * @param args The command-line arguments.
      */
     public static void main(String[] args) {
+        final String INPUT_JSON_PATH = "input/data.txt";
+        final int WIDTH = 1200;
+        final int HEIGHT = 800;
+        final int X_SPACING = 2; // Adjust to control the horizontal spacing
+        final int Y_SPACING = 6; // Adjust to control the vertical spacing
+
         try {
             // Read JSON data from the file
-            String jsonData = JSONProcessor.readJSONFromFile("input/data.txt");
+            String jsonData = JSONProcessor.readJSONFromFile(INPUT_JSON_PATH);
 
             // Parse the JSON data into a list of WeatherData objects
             List<WeatherData> weatherDataList = JSONProcessor.parseJSONData(jsonData);
@@ -36,7 +36,7 @@ public class WeatherArtGenerator {
             List<List<Segment>> windSubegments = divideSegments(windSegments);
 
             // Create and display the JFrame
-            createAndDisplayFrame(windSubegments);
+            generateWindArt(windSubegments, WIDTH, HEIGHT, X_SPACING, Y_SPACING);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -170,14 +170,18 @@ public class WeatherArtGenerator {
     }
 
     /**
-     * Plots wind curves on a JPanel.
+     * Generates generative art representing wind curves based on a list of wind subsegments
+     * and displays it in a graphical frame. The generated art is saved as an image file.
      *
-     * @param windSubegments A list of wind curve segments.
+     * @param windSubsegments A list of wind curve subsegments, where each sublist represents
+     *                        a segment of the wind curve.
+     * @throws IOException If an I/O error occurs while saving the generated image.
      */
-    public static void createAndDisplayFrame(List<List<Segment>> windSubegments) throws IOException {
+    public static void generateWindArt(
+            List<List<Segment>> windSubsegments,
+            int width, int height, int xSpacing, int ySpacing
+    ) throws IOException {
         // Create a BufferedImage to draw the wind curves on
-        int width = 1200;
-        int height = 800;
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
         // Get the graphics context of the image
@@ -191,11 +195,11 @@ public class WeatherArtGenerator {
         int yOffset = 0;
         int xOffset = 0;
 
-        for (List<Segment> segmentList : windSubegments) {
+        for (List<Segment> segmentList : windSubsegments) {
             plotWindCurve(graphics, segmentList, xOffset, yOffset);
 
-            yOffset += 6; // Adjust as needed to control the vertical spacing
-            xOffset += 2; // Adjust as needed to control the vertical spacing
+            xOffset += xSpacing;
+            yOffset += ySpacing;
         }
 
         // Save the generated image
