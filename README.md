@@ -9,7 +9,7 @@ The Weather Art Generator is a Java application that creates generative art base
 - [Usage](#usage)
 - [Project Structure](#project-structure)
 - [Contributing](#contributing)
-- [License](#license)
+- [Examples](#examples)
 
 ## Features
 
@@ -21,10 +21,6 @@ The Weather Art Generator is a Java application that creates generative art base
 
 ## Installation
 
-1. **Ensure you have Java and Dependencies Installed**
-
-   Before using the Weather Art Generator, make sure you have Java installed on your machine. You can download and install Java from the official [Java website](https://www.oracle.com/java/technologies/javase-downloads.html).
-
 2. **Clone the Repository**
 
    Clone the repository to your local machine using Git:
@@ -33,7 +29,15 @@ The Weather Art Generator is a Java application that creates generative art base
    git clone https://github.com/yourusername/weather-art-generator.git
    ```
 
-2. **Navigate to the Project Directory**
+1. **Ensure you have Java and Dependencies Installed**
+
+   Before using the Weather Art Generator, make sure you have Java installed on your machine. You can download and install Java from the official [Java website](https://www.oracle.com/java/technologies/javase-downloads.html).
+
+## Usage
+
+1. **Place your weather data in the input/data.txt file in JSON format.**
+
+2. **Open a terminal and navigate to the project directory.**
 
    Open a terminal and navigate to the project directory:
 
